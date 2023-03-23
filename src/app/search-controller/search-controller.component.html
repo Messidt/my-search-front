@@ -1,0 +1,23 @@
+<form [formGroup]="form">
+  <mat-grid-list cols="12" rowHeight="2:1" gutterSize="24px">
+    <mat-grid-tile colspan="3">
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput placeholder="Type name" formControlName="name">
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="3">
+      <mat-form-field>
+        <mat-label>Weight</mat-label>
+        <input matInput placeholder="Type weight" formControlName="weight">
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="3">
+      <mat-form-field>
+        <mat-label>Symbol</mat-label>
+        <input matInput placeholder="Type symbol" formControlName="symbol">
+      </mat-form-field>
+    </mat-grid-tile>
+  </mat-grid-list>
+</form>
+
