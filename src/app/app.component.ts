@@ -1,12 +1,44 @@
-import { Component } from '@angular/core';
-import { ELEMENT_DATA } from './types';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { SearchService } from './search.service';
+import { Subscription } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
+export class AppComponent  implements OnInit, OnDestroy {
+  displayedColumns: string[] = ['id', 'cityName', 'countryCode', 'district', 'population'];
+  dataSource: any[] = [];
+  subscription = new Subscription();
+  isLoading = true;
+  constructor(private searchService: SearchService) {
+  }
+
+  ngOnInit(): void {
+    this.subscribeOnLoading();
+    this.getData();
+  }
+
+  ngOnDestroy(): void {
+      this.subscription.unsubscribe();
+  }
+
+  private getData() {
+    this.subscription.add(this.searchService.tableData$
+      .pipe(tap(() => this.isLoading = false))
+      .subscribe((data) => {
+        console.log(data);
+        this.dataSource = data;
+      }))
+  }
+
+  private subscribeOnLoading() {
+    this.subscription.add(this.searchService.isLoading$
+      .subscribe((data) => {
+        console.log(data);
+        this.isLoading = data;
+      }));
+  }
 }

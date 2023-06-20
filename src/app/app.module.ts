@@ -9,6 +9,9 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import { SearchControllerComponent } from './search-controller/search-controller.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
+import {HttpClientModule} from '@angular/common/http'
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -17,12 +20,15 @@ import {MatInputModule} from '@angular/material/input';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
+    MatButtonModule,
     MatTableModule,
     MatCardModule,
     MatInputModule,
     ReactiveFormsModule,
     MatGridListModule,
     AppRoutingModule,
+    MatProgressSpinnerModule,
     BrowserAnimationsModule
   ],
   providers: [],

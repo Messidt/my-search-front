@@ -2,22 +2,29 @@
   <mat-grid-list cols="12" rowHeight="2:1" gutterSize="24px">
     <mat-grid-tile colspan="3">
       <mat-form-field>
-        <mat-label>Name</mat-label>
-        <input matInput placeholder="Type name" formControlName="name">
+        <mat-label>City Name</mat-label>
+        <input matInput placeholder="Type city name" formControlName="cityName">
       </mat-form-field>
     </mat-grid-tile>
     <mat-grid-tile colspan="3">
       <mat-form-field>
-        <mat-label>Weight</mat-label>
-        <input matInput placeholder="Type weight" formControlName="weight">
+        <mat-label>Country Code</mat-label>
+        <input matInput placeholder="Type country code" formControlName="countryCode">
       </mat-form-field>
     </mat-grid-tile>
     <mat-grid-tile colspan="3">
       <mat-form-field>
-        <mat-label>Symbol</mat-label>
-        <input matInput placeholder="Type symbol" formControlName="symbol">
+        <mat-label>District</mat-label>
+        <input matInput placeholder="Type district" formControlName="district">
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="3">
+      <mat-form-field>
+        <mat-label>Population</mat-label>
+        <input matInput placeholder="Type population" formControlName="population">
       </mat-form-field>
     </mat-grid-tile>
   </mat-grid-list>
+  <button (click)="search()" mat-raised-button color="primary">Search</button>
 </form>
 
