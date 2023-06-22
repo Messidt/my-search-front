@@ -8,14 +8,24 @@
     </mat-grid-tile>
     <mat-grid-tile colspan="3">
       <mat-form-field>
-        <mat-label>Country Code</mat-label>
-        <input matInput placeholder="Type country code" formControlName="countryCode">
+        <mat-label>Country Name</mat-label>
+        <input matInput placeholder="Type country name" formControlName="countryName">
       </mat-form-field>
     </mat-grid-tile>
     <mat-grid-tile colspan="3">
       <mat-form-field>
-        <mat-label>District</mat-label>
-        <input matInput placeholder="Type district" formControlName="district">
+        <mat-label>Country Code</mat-label>
+        <mat-select formControlName="countryCode">
+          <mat-option *ngFor="let code of countryCodes" [value]="code.value">
+            {{code.label}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="3">
+      <mat-form-field>
+        <mat-label>Continent</mat-label>
+        <input matInput placeholder="Type continent" formControlName="continent">
       </mat-form-field>
     </mat-grid-tile>
     <mat-grid-tile colspan="3">
@@ -25,6 +35,9 @@
       </mat-form-field>
     </mat-grid-tile>
   </mat-grid-list>
-  <button (click)="search()" mat-raised-button color="primary">Search</button>
+  <div class="actions">
+    <button (click)="search()" mat-raised-button color="primary">Search</button>
+    <button (click)="form.reset()" mat-raised-button color="primary">Reset search</button>
+  </div>
 </form>
 

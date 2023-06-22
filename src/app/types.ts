@@ -1,7 +1,7 @@
 export interface Country {
   cityName: number;
-  name: string;
-  district: string;
+  countryName: string;
+  continent: string;
   countryCode: string;
   population: number;
 }
@@ -12,4 +12,9 @@ export interface SearchParams {
   page?: string;
   pageSize?: string;
   searchFields: {[key: string]: any}
+}
+
+export interface DropDownOption {
+  value: string;
+  label: string;
 }

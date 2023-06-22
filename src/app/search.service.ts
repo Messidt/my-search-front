@@ -14,6 +14,7 @@ export class SearchService {
   constructor(private http: HttpClient) { }
 
   getCountries(params?: SearchParams): Observable<Country[]> {
+    console.log(params);
     return this.http.get<Country[]>(`http://localhost:3000/countries?${params ? this.parseSearchParamsToQueryParams(params) : ''}`);
   }
 
@@ -26,7 +27,7 @@ export class SearchService {
     return `${searchFields ? searchFields : ''}`;
   }
 
-  getDictionary(type: string) {
-    return this.http.get<Country[]>(`http://localhost:3000/dictionaries?type=${type}`);
+  getDictionary(type: string): Observable<string[]> {
+    return this.http.get<string[]>(`http://localhost:3000/dictionaries?type=${type}`);
   }
 }

@@ -5,3 +5,11 @@ mat-form-field {
 form {
   padding: 16px 32px;
 }
+
+.actions {
+  display: flex;
+  justify-content: center;
+  button {
+    margin: 16px 8px;
+  }
+}

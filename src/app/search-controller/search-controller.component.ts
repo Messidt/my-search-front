@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { SearchFormBuilder } from './search-form.builder';
 import { SearchService } from '../search.service';
-import { Country } from '../types';
+import { Country, DropDownOption } from '../types';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-search-controller',
@@ -10,6 +11,7 @@ import { Country } from '../types';
 })
 export class SearchControllerComponent implements OnInit {
   form = SearchFormBuilder.build();
+  countryCodes: DropDownOption[] = [];
 
   constructor(private searchService: SearchService) {
   }
@@ -39,6 +41,11 @@ export class SearchControllerComponent implements OnInit {
 
   private getCountryCodes() {
     this.searchService.getDictionary('code')
-    .subscribe((data) => console.log(data));
+    .pipe(map((array: string[]) => {
+      return array.map((elm: string) => {
+        return {value: elm, label: elm};
+      })
+    }))
+    .subscribe((data) => this.countryCodes = data);
   }
 }

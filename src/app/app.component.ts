@@ -9,7 +9,7 @@ import { tap } from 'rxjs/operators';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent  implements OnInit, OnDestroy {
-  displayedColumns: string[] = ['id', 'cityName', 'countryCode', 'district', 'population'];
+  displayedColumns: string[] = ['id', 'cityName', 'countryName', 'countryCode', 'continent', 'population'];
   dataSource: any[] = [];
   subscription = new Subscription();
   isLoading = true;
@@ -29,7 +29,6 @@ export class AppComponent  implements OnInit, OnDestroy {
     this.subscription.add(this.searchService.tableData$
       .pipe(tap(() => this.isLoading = false))
       .subscribe((data) => {
-        console.log(data);
         this.dataSource = data;
       }))
   }
@@ -37,7 +36,6 @@ export class AppComponent  implements OnInit, OnDestroy {
   private subscribeOnLoading() {
     this.subscription.add(this.searchService.isLoading$
       .subscribe((data) => {
-        console.log(data);
         this.isLoading = data;
       }));
   }
