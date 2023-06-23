@@ -8,14 +8,14 @@ import { SearchParams, Country } from './types';
 })
 export class SearchService {
 
-  tableData$ = new ReplaySubject<any[]>(1);
+  tableData$ = new ReplaySubject<{totalElements: number, content: Country[]}>(1);
   isLoading$ = new BehaviorSubject<boolean>(true);
 
   constructor(private http: HttpClient) { }
 
-  getCountries(params?: SearchParams): Observable<Country[]> {
+  getCountries(params?: SearchParams): Observable<{totalElements: number, content: Country[]}> {
     console.log(params);
-    return this.http.get<Country[]>(`http://localhost:3000/countries?${params ? this.parseSearchParamsToQueryParams(params) : ''}`);
+    return this.http.get<{totalElements: number, content: Country[]}>(`http://localhost:3000/countries?${params ? this.parseSearchParamsToQueryParams(params) : ''}`);
   }
 
   private parseSearchParamsToQueryParams(params: SearchParams) {

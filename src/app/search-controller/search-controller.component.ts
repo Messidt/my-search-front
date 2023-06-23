@@ -18,22 +18,22 @@ export class SearchControllerComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCountryCodes();
-    this.getProducts();
+    this.getData();
   }
 
   search() {
     this.searchService.isLoading$.next(true);
     this.searchService.getCountries({searchFields: this.form.getRawValue()})
-    .subscribe((data: Country[]) => {
+    .subscribe((data: {totalElements: number, content: Country[]}) => {
       this.searchService.tableData$.next(data);
       this.searchService.isLoading$.next(false);
     });
   }
 
-  private getProducts() {
+  private getData() {
     this.searchService.isLoading$.next(true);
     this.searchService.getCountries()
-    .subscribe((data: Country[]) => {
+    .subscribe((data: {totalElements: number, content: Country[]}) => {
       this.searchService.tableData$.next(data);
       this.searchService.isLoading$.next(false);
     });

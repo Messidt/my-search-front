@@ -13,6 +13,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {HttpClientModule} from '@angular/common/http'
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatSelectModule} from '@angular/material/select';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import {MatSelectModule} from '@angular/material/select';
     MatTableModule,
     MatCardModule,
     MatSelectModule,
+    MatPaginatorModule,
     MatInputModule,
     ReactiveFormsModule,
     MatGridListModule,
