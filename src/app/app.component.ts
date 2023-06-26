@@ -33,7 +33,7 @@ export class AppComponent  implements OnInit, OnDestroy {
   }
 
   handlePageEvent(e: PageEvent) {
-    console.log(e);
+    this.searchService.pagination$.next({pageIndex: e.pageIndex, pageSize: e.pageSize});
     this.pageEvent = e;
     this.length = e.length;
     this.pageSize = e.pageSize;

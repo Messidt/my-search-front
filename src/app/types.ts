@@ -9,7 +9,7 @@ export interface Country {
 export interface SearchParams {
   sort?: string;
   sortDirection?: 'asc' | 'dsc';
-  page?: string;
+  pageIndex?: string;
   pageSize?: string;
   searchFields: {[key: string]: any}
 }

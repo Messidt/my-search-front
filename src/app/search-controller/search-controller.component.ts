@@ -3,6 +3,7 @@ import { SearchFormBuilder } from './search-form.builder';
 import { SearchService } from '../search.service';
 import { Country, DropDownOption } from '../types';
 import { map } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-search-controller',
@@ -12,11 +13,13 @@ import { map } from 'rxjs/operators';
 export class SearchControllerComponent implements OnInit {
   form = SearchFormBuilder.build();
   countryCodes: DropDownOption[] = [];
+  private sub = new Subscription();
 
   constructor(private searchService: SearchService) {
   }
 
   ngOnInit(): void {
+    this.subscribeOnPagination();
     this.getCountryCodes();
     this.getData();
   }
@@ -47,5 +50,19 @@ export class SearchControllerComponent implements OnInit {
       })
     }))
     .subscribe((data) => this.countryCodes = data);
+  }
+
+  private subscribeOnPagination() {
+    this.sub.add(
+      this.searchService.pagination$
+      .subscribe((data: {pageSize: number, pageIndex: number}) => {
+        this.searchService.isLoading$.next(true);
+        this.searchService.getCountries({searchFields: Object.assign({}, this.form.getRawValue(), data)})
+        .subscribe((data: {totalElements: number, content: Country[]}) => {
+        this.searchService.tableData$.next(data);
+        this.searchService.isLoading$.next(false);
+        });
+      })
+    )
   }
 }

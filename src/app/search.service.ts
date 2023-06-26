@@ -9,12 +9,12 @@ import { SearchParams, Country } from './types';
 export class SearchService {
 
   tableData$ = new ReplaySubject<{totalElements: number, content: Country[]}>(1);
+  pagination$ = new BehaviorSubject<{pageSize: number, pageIndex: number}>({pageIndex: 0, pageSize: 0});
   isLoading$ = new BehaviorSubject<boolean>(true);
 
   constructor(private http: HttpClient) { }
 
   getCountries(params?: SearchParams): Observable<{totalElements: number, content: Country[]}> {
-    console.log(params);
     return this.http.get<{totalElements: number, content: Country[]}>(`http://localhost:3000/countries?${params ? this.parseSearchParamsToQueryParams(params) : ''}`);
   }
 
@@ -23,7 +23,7 @@ export class SearchService {
     .filter(e => params.searchFields[e] !== null && params.searchFields[e] !== '')
     .map((key: string) => `${key}=${params.searchFields[key]}`)
     .join('&');
-    const listParams = `page=${params.page}&sort=${params.sort}&sortDirection=${params.sortDirection}`;
+    const listParams = `page=${params.searchFields['pageIndex']}`;
     return `${searchFields ? searchFields : ''}`;
   }
 
